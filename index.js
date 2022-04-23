@@ -63,16 +63,10 @@ app.get('/api/recipes/search', async (req, res) => {
   })
 
   if (!recipes) {
-    return {
-      status: 404,
-      body: 'No recipes found',
-    }
+    res.status(404).send('No recipes found')
   }
 
-  return {
-    status: 200,
-    body: recipes,
-  }
+  res.json(recipes)
 })
 
 app.listen(PORT, () => {
