@@ -47,6 +47,34 @@ app.get('/api/recipe', async (req, res) => {
   res.json(recipe)
 })
 
+app.get('/api/recipes/search', async (req, res) => {
+  const { searchTerms } = req.query
+
+  if (!searchTerms) {
+    res.status(400).send('Missing searchTerms')
+  }
+
+  const recipes = await prisma.recipes.findMany({
+    where: {
+      body: {
+        search: searchTerm,
+      }
+    }
+  })
+
+  if (!recipes) {
+    return {
+      status: 404,
+      body: 'No recipes found',
+    }
+  }
+
+  return {
+    status: 200,
+    body: recipes,
+  }
+})
+
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`)
 })
