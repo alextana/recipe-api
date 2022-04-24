@@ -51,6 +51,8 @@ app.get('/api/recipes/search', async (req, res) => {
   let recipes = []
 
   try {
+    // sanitise search terms
+    searchTerms = searchTerms.replaceAll(' ', '&')
     recipes = await prisma.recipe.findMany({
       where: {
         ingredients: {
