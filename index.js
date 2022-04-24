@@ -48,15 +48,21 @@ app.get('/api/recipes/search', async (req, res) => {
     res.status(400).send('Missing searchTerms')
   }
 
-  const recipes = await prisma.recipe.findMany({
-    where: {
-      body: {
-        search: searchTerm,
-      }
-    }
-  })
+  let recipes = []
 
-  if (!recipes) {
+  try {
+    recipes = await prisma.recipe.findMany({
+      where: {
+        body: {
+          search: searchTerm,
+        }
+      },
+    })
+  } catch (error) {
+    console.error(error)
+  }
+
+  if (!recipes.length) {
     res.status(404).send('No recipes found')
   }
 
