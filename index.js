@@ -45,7 +45,7 @@ app.get('/api/recipes/search', async (req, res) => {
   const { searchTerms } = req.query
 
   if (!searchTerms) {
-    res.status(400).send('Missing searchTerms')
+    return res.status(400).send('Missing search terms')
   }
 
   let recipes = []
@@ -60,7 +60,7 @@ app.get('/api/recipes/search', async (req, res) => {
     })
   } catch (error) {
     console.error(error)
-    res.status(404).send('No recipes found')
+    return res.status(404).send('No recipes found')
   }
 
   res.json(recipes)
