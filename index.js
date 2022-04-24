@@ -60,9 +60,6 @@ app.get('/api/recipes/search', async (req, res) => {
     })
   } catch (error) {
     console.error(error)
-  }
-
-  if (!recipes.length) {
     res.status(404).send('No recipes found')
   }
 
