@@ -14,12 +14,6 @@ app.get('/api/recipes/random', async (req, res) => {
   // get query params
   const { apiKey, take } = req.query
 
-  // if (!apiKey) {
-  //   // check api key
-  //   res.status(400).send('Missing ApiKey')
-  //   return
-  // }
-
   const recipesCount = await prisma.recipe.count()
   const skip = Math.floor(Math.random() * recipesCount)
   const recipes = await prisma.recipe.findMany({
@@ -54,7 +48,7 @@ app.get('/api/recipes/search', async (req, res) => {
     res.status(400).send('Missing searchTerms')
   }
 
-  const recipes = await prisma.recipes.findMany({
+  const recipes = await prisma.recipe.findMany({
     where: {
       body: {
         search: searchTerm,
