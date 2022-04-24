@@ -53,7 +53,7 @@ app.get('/api/recipes/search', async (req, res) => {
   try {
     recipes = await prisma.recipe.findMany({
       where: {
-        body: {
+        ingredients: {
           search: searchTerms,
         }
       },
