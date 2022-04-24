@@ -1,8 +1,6 @@
 const PORT = process.env.PORT || 8080
 
 const express = require('express')
-const { PrismaClient } = require('@prisma/client')
-const prisma = new PrismaClient()
 
 const randomRoute = require('./routes/recipes/random/Random')
 const singleRecipeRoute = require('./routes/recipe/Recipe')
