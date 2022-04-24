@@ -42,7 +42,7 @@ app.get('/api/recipe', async (req, res) => {
 })
 
 app.get('/api/recipes/search', async (req, res) => {
-  const { searchTerms } = req.query
+  let { searchTerms } = req.query
 
   if (!searchTerms) {
     return res.status(400).send('Missing search terms')
